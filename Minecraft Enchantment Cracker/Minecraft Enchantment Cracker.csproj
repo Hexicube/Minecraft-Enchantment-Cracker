@@ -63,6 +63,7 @@
     </Page>
     <Compile Include="Cracker.cs" />
     <Compile Include="IProgressiveTask.cs" />
+    <Compile Include="MinecraftData.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -101,6 +102,9 @@
   <ItemGroup>
     <Resource Include="close1.png" />
     <Resource Include="close2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="items.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -163,7 +163,7 @@ namespace Minecraft_Enchantment_Cracker {
             return $"Seeds found: {LongToQty(LastSeedsFound)}";
         } }
         public string ProgressText2 { get {
-            if (LastSeedsFound == -1) return $"{(Progress*100).ToString("00.00")}%";
+            if (LastSeedsFound == -1) return $"{((int)(Progress*100)).ToString("00")}%";
             return $"Took {(LastSearchTime/1000f).ToString("0.0")}s";
         } }
         public int[] GetSeeds(int shelves, int slot1, int slot2, int slot3, int[] priorSeeds) {

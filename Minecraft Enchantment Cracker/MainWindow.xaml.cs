@@ -15,8 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Minecraft_Enchantment_Cracker
-{
+namespace Minecraft_Enchantment_Cracker {
     public partial class MainWindow : Window {
         public IProgressiveTask ProgressTask;
 
