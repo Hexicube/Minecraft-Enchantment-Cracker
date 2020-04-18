@@ -76,7 +76,7 @@ namespace Minecraft_Enchantment_Cracker {
         }
     }
 
-    public class Cracker {
+    public class Cracker : IProgressiveTask {
         public class IntArray {
             private int[] values;
             private int size = 0;
@@ -136,10 +136,40 @@ namespace Minecraft_Enchantment_Cracker {
 
         private int progressAmt, progressMax;
         public float Progress { get {
-            if (progressMax == -1) return (float)((long)progressAmt - (float)int.MinValue) / (float)((long)int.MaxValue - (long)int.MinValue);
+            if (progressMax == -1) return (float)((long)progressAmt - (long)int.MinValue) / (float)((long)int.MaxValue - (long)int.MinValue);
             return (float)progressAmt / (float)progressMax;
         } }
+        public bool Success => LastSeedsFound != 0;
+        private int LastSeedsFound = -1;
+        private int TheSeed;
+        private long LastSearchTime = 0;
+        private string LongToQty(long v) {
+            if (v > 1000000000) return $"{(v/1000000000f).ToString("0.00")}B";
+            if (v > 100000000) return $"{(v/1000000f).ToString("000")}M";
+            if (v > 10000000) return $"{(v/1000000f).ToString("00.0")}M";
+            if (v > 1000000) return $"{(v/1000000f).ToString("0.00")}M";
+            if (v > 100000) return $"{(v/1000f).ToString("000")}K";
+            if (v > 10000) return $"{(v/1000f).ToString("00.0")}K";
+            if (v > 1000) return $"{(v/1000f).ToString("0.00")}K";
+            return $"{v}";
+        }
+        public string ProgressText { get {
+            if (LastSeedsFound == -1) {
+                if (progressMax == -1) return $"{LongToQty((long)progressAmt - (long)int.MinValue)} / {LongToQty((long)int.MaxValue - (long)int.MinValue)}";
+                return $"{LongToQty(progressAmt)} / {LongToQty(progressMax)}";
+            }
+            if (LastSeedsFound == 0) return "No seeds found";
+            if (LastSeedsFound == 1) return $"Seed: {TheSeed.ToString("X8")}";
+            return $"Seeds found: {LongToQty(LastSeedsFound)}";
+        } }
+        public string ProgressText2 { get {
+            if (LastSeedsFound == -1) return $"{(Progress*100).ToString("00.00")}%";
+            return $"Took {(LastSearchTime/1000f).ToString("0.0")}s";
+        } }
         public int[] GetSeeds(int shelves, int slot1, int slot2, int slot3, int[] priorSeeds) {
+            LastSeedsFound = -1;
+            long start = Environment.TickCount;
+
             progressAmt = 0;
             progressMax = 1;
 
@@ -163,12 +193,11 @@ namespace Minecraft_Enchantment_Cracker {
             long seed;
 
             if (priorSeeds == null) {
-                // reasonable guess (based on 15:7/17/30)
+                // reasonable guess (based on 15:7/17/30 being ~80M)
                 result = new IntArray(100000000);
                 
-                // progress has explicit check for this
                 progressAmt = int.MinValue;
-                progressMax = -1;
+                progressMax = -1; // progress has explicit check for this
                 if (shelvesPlusOne == 16) {
                     do {
                         seed = JavaRandom.GetSeed(progressAmt);
@@ -182,6 +211,7 @@ namespace Minecraft_Enchantment_Cracker {
                         result.AddValue(progressAmt++);
                     }
                     while (progressAmt != int.MinValue);
+                    progressAmt = int.MaxValue;
                 }
                 else if ((shelvesPlusOne & -shelvesPlusOne) == shelvesPlusOne) {
                     do {
@@ -202,6 +232,7 @@ namespace Minecraft_Enchantment_Cracker {
                         result.AddValue(progressAmt++);
                     }
                     while (progressAmt != int.MinValue);
+                    progressAmt = int.MaxValue;
                 }
                 else {
                     do {
@@ -222,6 +253,7 @@ namespace Minecraft_Enchantment_Cracker {
                         result.AddValue(progressAmt++);
                     }
                     while (progressAmt != int.MinValue);
+                    progressAmt = int.MaxValue;
                 }
             }
             else {
@@ -231,7 +263,7 @@ namespace Minecraft_Enchantment_Cracker {
                 float total = (float)priorSeeds.Length;
                 progressMax = priorSeeds.Length;
                 foreach (int s in priorSeeds) {
-
+                    // less efficient, but runs on far fewer seeds
                     seed = JavaRandom.GetSeed(s);
                     
                     ench1 = seed.NextTwoInt(shelvesPlusOne);
@@ -251,7 +283,11 @@ namespace Minecraft_Enchantment_Cracker {
                 }
             }
 
-            return result.GetValues();
+            int[] values = result.GetValues();
+            LastSeedsFound = values.Length;
+            if (values.Length == 1) TheSeed = values[0];
+            LastSearchTime = Environment.TickCount - start;
+            return values;
         }
     }
 }

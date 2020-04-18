@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -16,18 +17,15 @@ using System.Windows.Shapes;
 
 namespace Minecraft_Enchantment_Cracker
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
-    {
+    public partial class MainWindow : Window {
+        public IProgressiveTask ProgressTask;
+
         public MainWindow() {
             InitializeComponent();
             
             Cracker c = new Cracker();
-            bool done = false;
+            ProgressTask = c;
             Task.Run(() => {
-
                 Debug.WriteLine("Running tester");
                 
                 long start = Environment.TickCount;
@@ -36,6 +34,7 @@ namespace Minecraft_Enchantment_Cracker
                 Debug.WriteLine($"Expected: 81788565 | Actual: {values.Length}");
                 if (values.Length == 81788565) {
                     Debug.WriteLine("First run OK");
+                    Task.Delay(2500).Wait();
 
                     start = Environment.TickCount;
                     int[] values2 = c.GetSeeds(14, 7, 15, 28, values);
@@ -43,16 +42,29 @@ namespace Minecraft_Enchantment_Cracker
                     Debug.WriteLine($"Expected: 2073151 | Actual: {values2.Length}");
                     if (values2.Length == 2073151) Debug.WriteLine("Second run OK");
                 }
-
-                done = true;
             });
-            Task.Run(() => {
+            Dispatcher.InvokeAsync(async () => {
+                bool success;
+                SolidColorBrush red = new SolidColorBrush((Color)ColorConverter.ConvertFromString("LightPink"));
+                SolidColorBrush green = new SolidColorBrush((Color)ColorConverter.ConvertFromString("LightGreen"));
                 while (true) {
-                    if (done) return;
-                    Debug.WriteLine($"Progress: {(c.Progress*100).ToString("000")}%");
-                    Task.Delay(1000).Wait();
+                    success = ProgressTask.Success;
+                    float p = success ? ProgressTask.Progress : 1f;
+                    ProgressBar.Value = p;
+                    ProgressBar.Foreground = success ? green : red;
+                    ProgressText.Text = ProgressTask.ProgressText;
+                    ProgressPercent.Text = ProgressTask.ProgressText2;
+                    await Task.Delay(50);
                 }
             });
+        }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e) {
+            if (e.ChangedButton == MouseButton.Left) this.DragMove();
+        }
+
+        private void ButtonClose_Click(object sender, RoutedEventArgs e) {
+            System.Windows.Application.Current.Shutdown();
         }
     }
 }
