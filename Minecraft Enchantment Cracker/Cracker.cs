@@ -7,29 +7,76 @@ using System.Threading.Tasks;
 
 namespace Minecraft_Enchantment_Cracker {
     public static class JavaRandom {
-        private const long multiplier = 0x5DEECE66DL;
-        private const long mask = (1L << 48) - 1;
+        public const long M = 0x5DEECE66DL;
+        public const long Mask = (1L << 48) - 1;
         
-        public static long GetSeed(long s) {
-            return (s ^ multiplier) & mask;
+        public static long GetSeed(int s) {
+            return (s ^ M) & Mask;
         }
 
         public static int NextInt(this ref long seed, int max) {
-            int r;
-            seed = (seed * multiplier + 0xBL) & mask;
-            r = (int)(seed >> 17) | (int)(seed << (64-17));
+            seed = (seed * M + 0xBL) & Mask;
+            int r = (int)((ulong)seed >> 17);
             int m = max - 1;
             if ((max & m) == 0) return (int)((max * (long)r) >> 31);
             int u = r;
             while (u - (r = u % max) + m < 0) {
-                seed = (seed * multiplier + 0xBL) & mask;
-                u = (int)(seed >> 17) | (int)(seed << (64-17));
+                seed = (seed * M + 0xBL) & Mask;
+                u = (int)((ulong)seed >> 17);
             }
             return r;
         }
+
+        public static int NextTwoInt(this ref long seed, int shelvesPlusOne) {
+            seed = (seed * M + 0xBL) & Mask;
+            int ret = (int)((ulong)seed >> 45) & 7;
+            
+            seed = (seed * M + 0xBL) & Mask;
+            int r = (int)((ulong)seed >> 17);
+            int m = shelvesPlusOne - 1;
+            if ((shelvesPlusOne & m) == 0) r = (int)((shelvesPlusOne * (long)r) >> 31);
+            else {
+                int u = r;
+                while (u - (r = u % shelvesPlusOne) + m < 0) {
+                    seed = (seed * M + 0xBL) & Mask;
+                    u = (int)((ulong)seed >> 17);
+                }
+            }
+
+            return ret + r;
+        }
+        
+        public static int NextTwoInt16(this ref long seed) {
+            seed = (seed * M + 0xBL) & Mask;
+            int first = (int)((ulong)seed >> 45) & 7;
+            seed = (seed * M + 0xBL) & Mask;
+            return first + ( (int)((ulong)seed >> 44) & 15);
+        }
+        public static int NextTwoIntP2(this ref long seed, int max) {
+            seed = (seed * M + 0xBL) & Mask;
+            int first = (int)((ulong)seed >> 45) & 7;
+
+            seed = (seed * M + 0xBL) & Mask;
+            return first + (int)((max * (long)((ulong)seed >> 17)) >> 31);
+        }
+        public static int NextTwoIntNotP2(this ref long seed, int max) {
+            seed = (seed * M + 0xBL) & Mask;
+            int first = (int)((ulong)seed >> 45) & 7;
+
+            seed = (seed * M + 0xBL) & Mask;
+            int r = (int)((ulong)seed >> 17);
+            int val;
+            do {
+                seed = (seed * M + 0xBL) & Mask;
+                r = (int)((ulong)seed >> 17);
+                val = r % max;
+            }
+            while (r - val + max < -1);
+            return first + val;
+        }
     }
 
-    public static class Cracker {
+    public class Cracker {
         public class IntArray {
             private int[] values;
             private int size = 0;
@@ -87,75 +134,119 @@ namespace Minecraft_Enchantment_Cracker {
             return enchantability < twiceShelves ? twiceShelves : enchantability;
         }
 
-        public static int[] GetSeeds(int shelves, int slot1, int slot2, int slot3, int[] priorSeeds, ref float progress) {
+        private int progressAmt, progressMax;
+        public float Progress { get {
+            if (progressMax == -1) return (float)((long)progressAmt - (float)int.MinValue) / (float)((long)int.MaxValue - (long)int.MinValue);
+            return (float)progressAmt / (float)progressMax;
+        } }
+        public int[] GetSeeds(int shelves, int slot1, int slot2, int slot3, int[] priorSeeds) {
+            progressAmt = 0;
+            progressMax = 1;
+
             IntArray result;
 
             // useful pre-computes
             int twoShelves = shelves * 2;
             int halfShelves = shelves / 2 + 1;
             int shelvesPlusOne = shelves + 1;
-            int firstEarly = slot1 * 3 + 1;
-            int secondEarly = slot2 * 3 / 2;
+
+            // pre-computes for tests
+            int slot1low = slot1 * 3 - halfShelves;
+            int slot1high = slot1 * 3 + 2 - halfShelves;
+            int threeSubHalf = 3 - halfShelves;
             int secondSubOne = slot2 - 1;
+            bool early3 = (slot3 == twoShelves) && ((shelves + 7 + halfShelves) <= twoShelves);
 
             // temp values
-            int ench1r1, ench1, ench2r1, ench2, ench3;
+            int ench1, ench2, ench3;
             
             long seed;
 
             if (priorSeeds == null) {
                 // reasonable guess (based on 15:7/17/30)
                 result = new IntArray(100000000);
+                
+                // progress has explicit check for this
+                progressAmt = int.MinValue;
+                progressMax = -1;
+                if (shelvesPlusOne == 16) {
+                    do {
+                        seed = JavaRandom.GetSeed(progressAmt);
+                    
+                        ench1 = seed.NextTwoInt16();
+                        if (ench1 < slot1low || ench1 > slot1high) { progressAmt++; continue; }
 
-                float total = (float)int.MaxValue - (float)int.MinValue;
-                int s = int.MinValue;
-                do {
-                    progress = ((float)s - (float)int.MinValue) / total;
+                        ench2 = (seed.NextTwoInt16() + halfShelves) * 2 / 3;
+                        if (ench2 != secondSubOne) { progressAmt++; continue; }
 
-                    seed = JavaRandom.GetSeed(s);
-
-                    ench1r1 = seed.NextInt(8) + halfShelves;
-                    if (ench1r1 > firstEarly) { s++; continue; }
-                    ench1 = (ench1r1 + seed.NextInt(shelvesPlusOne)) / 3;
-                    if (ench1 < 1) { if (slot1 != 1) { s++; continue; } }
-                    if (ench1 != slot1) { s++; continue; }
-
-                    ench2r1 = seed.NextInt(8) + halfShelves;
-                    if (ench2r1 > secondEarly) { s++; continue; }
-                    ench2 = (ench2r1 + seed.NextInt(shelvesPlusOne)) * 2 / 3;
-                    if (ench2 != secondSubOne) { s++; continue; }
-
-                    ench3 = (seed.NextInt(8) + halfShelves + seed.NextInt(shelvesPlusOne));
-                    if (Math.Max(ench3, twoShelves) != slot3) { s++; continue; }
-
-                    result.AddValue(s++);
+                        result.AddValue(progressAmt++);
+                    }
+                    while (progressAmt != int.MinValue);
                 }
-                while (s != int.MinValue);
+                else if ((shelvesPlusOne & -shelvesPlusOne) == shelvesPlusOne) {
+                    do {
+                        seed = JavaRandom.GetSeed(progressAmt);
+                    
+                        ench1 = seed.NextTwoIntP2(shelvesPlusOne);
+                        if (ench1 < threeSubHalf) { if (slot1 != 1) { progressAmt++; continue; } }
+                        if (ench1 < slot1low || ench1 > slot1high) { progressAmt++; continue; }
+
+                        ench2 = (seed.NextTwoIntP2(shelvesPlusOne) + halfShelves) * 2 / 3;
+                        if (ench2 != secondSubOne) { progressAmt++; continue; }
+
+                        if (!early3) {
+                            ench3 = (seed.NextTwoIntP2(shelvesPlusOne) + halfShelves);
+                            if (Math.Max(ench3, twoShelves) != slot3) { progressAmt++; continue; }
+                        }
+
+                        result.AddValue(progressAmt++);
+                    }
+                    while (progressAmt != int.MinValue);
+                }
+                else {
+                    do {
+                        seed = JavaRandom.GetSeed(progressAmt);
+                    
+                        ench1 = seed.NextTwoIntNotP2(shelvesPlusOne);
+                        if (ench1 < threeSubHalf) { if (slot1 != 1) { progressAmt++; continue; } }
+                        if (ench1 < slot1low || ench1 > slot1high) { progressAmt++; continue; }
+
+                        ench2 = (seed.NextTwoIntNotP2(shelvesPlusOne) + halfShelves) * 2 / 3;
+                        if (ench2 != secondSubOne) { progressAmt++; continue; }
+
+                        if (!early3) {
+                            ench3 = (seed.NextTwoIntNotP2(shelvesPlusOne) + halfShelves);
+                            if (Math.Max(ench3, twoShelves) != slot3) { progressAmt++; continue; }
+                        }
+
+                        result.AddValue(progressAmt++);
+                    }
+                    while (progressAmt != int.MinValue);
+                }
             }
             else {
                 // reasonable guess (+5 is for small quantities)
                 result = new IntArray(priorSeeds.Length / 20 + 5);
 
                 float total = (float)priorSeeds.Length;
+                progressMax = priorSeeds.Length;
                 foreach (int s in priorSeeds) {
-                    progress = (float)s / total;
 
                     seed = JavaRandom.GetSeed(s);
+                    
+                    ench1 = seed.NextTwoInt(shelvesPlusOne);
+                    if (ench1 < threeSubHalf) { if (slot1 != 1) { progressAmt++; continue; } }
+                    if (ench1 < slot1low || ench1 > slot1high) { progressAmt++; continue; }
 
-                    ench1r1 = seed.NextInt(8) + halfShelves;
-                    if (ench1r1 > firstEarly) continue;
-                    ench1 = (ench1r1 + seed.NextInt(shelvesPlusOne)) / 3;
-                    if (ench1 < 1) { if (slot1 != 1) continue; }
-                    if (ench1 != slot1) continue;
+                    ench2 = (seed.NextTwoInt(shelvesPlusOne) + halfShelves) * 2 / 3;
+                    if (ench2 != secondSubOne) { progressAmt++; continue; }
 
-                    ench2r1 = seed.NextInt(8) + halfShelves;
-                    if (ench2r1 > secondEarly) continue;
-                    ench2 = (ench2r1 + seed.NextInt(shelvesPlusOne)) * 2 / 3;
-                    if (ench2 != secondSubOne) continue;
+                    if (!early3) {
+                        ench3 = (seed.NextTwoInt(shelvesPlusOne) + halfShelves);
+                        if (Math.Max(ench3, twoShelves) != slot3) { progressAmt++; continue; }
+                    }
 
-                    ench3 = (seed.NextInt(8) + halfShelves + seed.NextInt(shelvesPlusOne));
-                    if (Math.Max(ench3, twoShelves) != slot3) continue;
-
+                    progressAmt++;
                     result.AddValue(s);
                 }
             }

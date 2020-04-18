@@ -23,33 +23,33 @@ namespace Minecraft_Enchantment_Cracker
     {
         public MainWindow() {
             InitializeComponent();
-
-            float progress = 0f;
+            
+            Cracker c = new Cracker();
+            bool done = false;
             Task.Run(() => {
+
                 Debug.WriteLine("Running tester");
                 
                 long start = Environment.TickCount;
-                progress = 0f;
-                int[] values = Cracker.GetSeeds(15, 7, 17, 30, null, ref progress);
+                int[] values = c.GetSeeds(15, 7, 17, 30, null);
                 Debug.WriteLine($"Took {Environment.TickCount - start}ms");
                 Debug.WriteLine($"Expected: 81788565 | Actual: {values.Length}");
                 if (values.Length == 81788565) {
                     Debug.WriteLine("First run OK");
 
                     start = Environment.TickCount;
-                    progress = 0f;
-                    int[] values2 = Cracker.GetSeeds(14, 7, 15, 28, values, ref progress);
+                    int[] values2 = c.GetSeeds(14, 7, 15, 28, values);
                     Debug.WriteLine($"Took {Environment.TickCount - start}ms");
                     Debug.WriteLine($"Expected: 2073151 | Actual: {values2.Length}");
                     if (values2.Length == 2073151) Debug.WriteLine("Second run OK");
                 }
 
-                progress = -1f;
+                done = true;
             });
             Task.Run(() => {
                 while (true) {
-                    if (progress < 0) return;
-                    Debug.WriteLine($"Progress: {(progress*100).ToString("000")}%");
+                    if (done) return;
+                    Debug.WriteLine($"Progress: {(c.Progress*100).ToString("000")}%");
                     Task.Delay(1000).Wait();
                 }
             });
