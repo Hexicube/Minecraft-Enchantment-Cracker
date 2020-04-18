@@ -16,7 +16,25 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Minecraft_Enchantment_Cracker {
+    public class ItemBackgroundCanvas : Canvas {
+        private SolidColorBrush brushOK  = new SolidColorBrush(new Color { R=139, G=139, B=139, A=255 }),
+                                brushBAD = new SolidColorBrush(new Color { R= 85, G= 85, B= 85, A=255 }),
+                                brushSEL = new SolidColorBrush(new Color { R=139, G=255, B=139, A=255 });
+        protected override void OnRender(DrawingContext dc) {
+            base.OnRender(dc);
+            for (int y = 0; y < MainWindow.avail.Length; y++) {
+                for (int x = 0; x < MainWindow.avail[y].Length; x++) {
+                    dc.DrawRectangle(MainWindow.avail[y][x] ? ((x==MainWindow.SELECTION.x && y==MainWindow.SELECTION.y) ? brushSEL : brushOK) : brushBAD, null, new Rect(x*36, y*36, 36, 36));
+                }
+            }
+        }
+    }
+
     public partial class MainWindow : Window {
+        public static MinecraftData.MinecraftVersion MCVER = MinecraftData.MinecraftVersion.VERSIONS[5];
+        public static bool[][] avail = MinecraftData.GetAvailability(MainWindow.MCVER);
+        public static (int x, int y) SELECTION = (3,2);
+
         public IProgressiveTask ProgressTask;
 
         public MainWindow() {
@@ -63,7 +81,18 @@ namespace Minecraft_Enchantment_Cracker {
         }
 
         private void ButtonClose_Click(object sender, RoutedEventArgs e) {
-            System.Windows.Application.Current.Shutdown();
+            Application.Current.Shutdown();
+        }
+
+        private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) {
+            if (e.ChangedButton == MouseButton.Left) {
+                Point p = e.GetPosition(sender as IInputElement);
+                (int x, int y) item = ((int)p.X / 36, (int)p.Y / 36);
+                if (avail[item.y][item.x]) {
+                    SELECTION = item;
+                    ItemCanvas.InvalidateVisual();
+                }
+            }
         }
     }
 }

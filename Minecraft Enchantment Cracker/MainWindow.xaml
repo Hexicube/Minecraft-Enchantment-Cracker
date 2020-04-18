@@ -42,8 +42,8 @@
         <ProgressBar x:Name="ProgressBar" Value=".5" Maximum="1" Background="Transparent" Foreground="LightGreen" BorderThickness="0" Margin="12,270,-488,-288" />
         <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="12345/67890" x:Name="ProgressText" Margin="14,268,-250,-220" Background="Transparent" />
         <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="12%" x:Name="ProgressPercent" Margin="250,268,-488,-288" Background="Transparent" TextAlignment="Right" />
-        <Canvas x:Name="ItemsArea" Margin="10,10,-333,-261">
-            <Image Source="./items.png" />
-        </Canvas>
+        <local:ItemBackgroundCanvas x:Name="ItemCanvas" Margin="10,10,-333,-261">
+            <Image Source="./items.png" MouseLeftButtonDown="Image_MouseLeftButtonDown" />
+        </local:ItemBackgroundCanvas>
     </FixedPage>
 </Window>
