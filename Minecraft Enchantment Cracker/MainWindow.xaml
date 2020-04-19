@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Minecraft_Enchantment_Cracker"
         mc:Ignorable="d"
-        Title="MainWindow"
+        Title="Minecraft Enchantment Cracker"
         AllowsTransparency="True"
         ResizeMode="NoResize"
         WindowStyle="None"
@@ -53,99 +53,99 @@
                 <!-- Enchanting table value input -->
                 <FixedPage Margin="348,104,-488,-122" Background="Transparent">
                     <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="15" Margin="1,-2,-33,10" TextAlignment="Center" />
-                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf15Slot1" Margin="38,-2,-66,10" Padding="0,0,-2,-12" MaxLength="2" />
-                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf15Slot2" Margin="74,-2,-102,10" Padding="0,0,-2,-12" MaxLength="2" />
-                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf15Slot3" Margin="110,-2,-138,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" PreviewTextInput="TextEntryNumeric" DataObject.Pasting="TextPasteNumeric" x:Name="Shelf15Slot1" Margin="38,-2,-66,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" PreviewTextInput="TextEntryNumeric" DataObject.Pasting="TextPasteNumeric" x:Name="Shelf15Slot2" Margin="74,-2,-102,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" PreviewTextInput="TextEntryNumeric" DataObject.Pasting="TextPasteNumeric" x:Name="Shelf15Slot3" Margin="110,-2,-138,10" Padding="0,0,-2,-12" MaxLength="2" />
                 </FixedPage>
                 <FixedPage Margin="348,126,-488,-144" Background="Transparent">
                     <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="14" Margin="1,-2,-33,10" TextAlignment="Center" />
-                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf14Slot1" Margin="38,-2,-66,10" Padding="0,0,-2,-12" MaxLength="2" />
-                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf14Slot2" Margin="74,-2,-102,10" Padding="0,0,-2,-12" MaxLength="2" />
-                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf14Slot3" Margin="110,-2,-138,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" PreviewTextInput="TextEntryNumeric" DataObject.Pasting="TextPasteNumeric" x:Name="Shelf14Slot1" Margin="38,-2,-66,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" PreviewTextInput="TextEntryNumeric" DataObject.Pasting="TextPasteNumeric" x:Name="Shelf14Slot2" Margin="74,-2,-102,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" PreviewTextInput="TextEntryNumeric" DataObject.Pasting="TextPasteNumeric" x:Name="Shelf14Slot3" Margin="110,-2,-138,10" Padding="0,0,-2,-12" MaxLength="2" />
                 </FixedPage>
                 <FixedPage Margin="348,148,-488,-166" Background="Transparent">
                     <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="13" Margin="1,-2,-33,10" TextAlignment="Center" />
-                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf13Slot1" Margin="38,-2,-66,10" Padding="0,0,-2,-12" MaxLength="2" />
-                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf13Slot2" Margin="74,-2,-102,10" Padding="0,0,-2,-12" MaxLength="2" />
-                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf13Slot3" Margin="110,-2,-138,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" PreviewTextInput="TextEntryNumeric" DataObject.Pasting="TextPasteNumeric" x:Name="Shelf13Slot1" Margin="38,-2,-66,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" PreviewTextInput="TextEntryNumeric" DataObject.Pasting="TextPasteNumeric" x:Name="Shelf13Slot2" Margin="74,-2,-102,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" PreviewTextInput="TextEntryNumeric" DataObject.Pasting="TextPasteNumeric" x:Name="Shelf13Slot3" Margin="110,-2,-138,10" Padding="0,0,-2,-12" MaxLength="2" />
                 </FixedPage>
                 <FixedPage Margin="348,170,-488,-188" Background="Transparent">
                     <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="12" Margin="1,-2,-33,10" TextAlignment="Center" />
-                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf12Slot1" Margin="38,-2,-66,10" Padding="0,0,-2,-12" MaxLength="2" />
-                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf12Slot2" Margin="74,-2,-102,10" Padding="0,0,-2,-12" MaxLength="2" />
-                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf12Slot3" Margin="110,-2,-138,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" PreviewTextInput="TextEntryNumeric" DataObject.Pasting="TextPasteNumeric" x:Name="Shelf12Slot1" Margin="38,-2,-66,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" PreviewTextInput="TextEntryNumeric" DataObject.Pasting="TextPasteNumeric" x:Name="Shelf12Slot2" Margin="74,-2,-102,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" PreviewTextInput="TextEntryNumeric" DataObject.Pasting="TextPasteNumeric" x:Name="Shelf12Slot3" Margin="110,-2,-138,10" Padding="0,0,-2,-12" MaxLength="2" />
                 </FixedPage>
                 <FixedPage Margin="348,192,-488,-210" Background="Transparent">
                     <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="11" Margin="1,-2,-33,10" TextAlignment="Center" />
-                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf11Slot1" Margin="38,-2,-66,10" Padding="0,0,-2,-12" MaxLength="2" />
-                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf11Slot2" Margin="74,-2,-102,10" Padding="0,0,-2,-12" MaxLength="2" />
-                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf11Slot3" Margin="110,-2,-138,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" PreviewTextInput="TextEntryNumeric" DataObject.Pasting="TextPasteNumeric" x:Name="Shelf11Slot1" Margin="38,-2,-66,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" PreviewTextInput="TextEntryNumeric" DataObject.Pasting="TextPasteNumeric" x:Name="Shelf11Slot2" Margin="74,-2,-102,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" PreviewTextInput="TextEntryNumeric" DataObject.Pasting="TextPasteNumeric" x:Name="Shelf11Slot3" Margin="110,-2,-138,10" Padding="0,0,-2,-12" MaxLength="2" />
                 </FixedPage>
                 <FixedPage Margin="348,214,-488,-232" Background="Transparent">
                     <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="10" Margin="1,-2,-33,10" TextAlignment="Center" />
-                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf10Slot1" Margin="38,-2,-66,10" Padding="0,0,-2,-12" MaxLength="2" />
-                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf10Slot2" Margin="74,-2,-102,10" Padding="0,0,-2,-12" MaxLength="2" />
-                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf10Slot3" Margin="110,-2,-138,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" PreviewTextInput="TextEntryNumeric" DataObject.Pasting="TextPasteNumeric" x:Name="Shelf10Slot1" Margin="38,-2,-66,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" PreviewTextInput="TextEntryNumeric" DataObject.Pasting="TextPasteNumeric" x:Name="Shelf10Slot2" Margin="74,-2,-102,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" PreviewTextInput="TextEntryNumeric" DataObject.Pasting="TextPasteNumeric" x:Name="Shelf10Slot3" Margin="110,-2,-138,10" Padding="0,0,-2,-12" MaxLength="2" />
                 </FixedPage>
                 <FixedPage Margin="348,236,-488,-254" Background="Transparent">
                     <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="9" Margin="1,-2,-33,10" TextAlignment="Center" />
-                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf9Slot1" Margin="38,-2,-66,10" Padding="0,0,-2,-12" MaxLength="2" />
-                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf9Slot2" Margin="74,-2,-102,10" Padding="0,0,-2,-12" MaxLength="2" />
-                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf9Slot3" Margin="110,-2,-138,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" PreviewTextInput="TextEntryNumeric" DataObject.Pasting="TextPasteNumeric" x:Name="Shelf9Slot1" Margin="38,-2,-66,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" PreviewTextInput="TextEntryNumeric" DataObject.Pasting="TextPasteNumeric" x:Name="Shelf9Slot2" Margin="74,-2,-102,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" PreviewTextInput="TextEntryNumeric" DataObject.Pasting="TextPasteNumeric" x:Name="Shelf9Slot3" Margin="110,-2,-138,10" Padding="0,0,-2,-12" MaxLength="2" />
                 </FixedPage>
                 <FixedPage Margin="348,258,-488,-276" Background="Transparent">
                     <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="8" Margin="1,-2,-33,10" TextAlignment="Center" />
-                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf8Slot1" Margin="38,-2,-66,10" Padding="0,0,-2,-12" MaxLength="2" />
-                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf8Slot2" Margin="74,-2,-102,10" Padding="0,0,-2,-12" MaxLength="2" />
-                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf8Slot3" Margin="110,-2,-138,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" PreviewTextInput="TextEntryNumeric" DataObject.Pasting="TextPasteNumeric" x:Name="Shelf8Slot1" Margin="38,-2,-66,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" PreviewTextInput="TextEntryNumeric" DataObject.Pasting="TextPasteNumeric" x:Name="Shelf8Slot2" Margin="74,-2,-102,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" PreviewTextInput="TextEntryNumeric" DataObject.Pasting="TextPasteNumeric" x:Name="Shelf8Slot3" Margin="110,-2,-138,10" Padding="0,0,-2,-12" MaxLength="2" />
                 </FixedPage>
                 <FixedPage Margin="348,280,-488,-298" Background="Transparent">
                     <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="7" Margin="1,-2,-33,10" TextAlignment="Center" />
-                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf7Slot1" Margin="38,-2,-66,10" Padding="0,0,-2,-12" MaxLength="2" />
-                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf7Slot2" Margin="74,-2,-102,10" Padding="0,0,-2,-12" MaxLength="2" />
-                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf7Slot3" Margin="110,-2,-138,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" PreviewTextInput="TextEntryNumeric" DataObject.Pasting="TextPasteNumeric" x:Name="Shelf7Slot1" Margin="38,-2,-66,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" PreviewTextInput="TextEntryNumeric" DataObject.Pasting="TextPasteNumeric" x:Name="Shelf7Slot2" Margin="74,-2,-102,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" PreviewTextInput="TextEntryNumeric" DataObject.Pasting="TextPasteNumeric" x:Name="Shelf7Slot3" Margin="110,-2,-138,10" Padding="0,0,-2,-12" MaxLength="2" />
                 </FixedPage>
                 <FixedPage Margin="348,302,-488,-320" Background="Transparent">
                     <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="6" Margin="1,-2,-33,10" TextAlignment="Center" />
-                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf6Slot1" Margin="38,-2,-66,10" Padding="0,0,-2,-12" MaxLength="2" />
-                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf6Slot2" Margin="74,-2,-102,10" Padding="0,0,-2,-12" MaxLength="2" />
-                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf6Slot3" Margin="110,-2,-138,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" PreviewTextInput="TextEntryNumeric" DataObject.Pasting="TextPasteNumeric" x:Name="Shelf6Slot1" Margin="38,-2,-66,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" PreviewTextInput="TextEntryNumeric" DataObject.Pasting="TextPasteNumeric" x:Name="Shelf6Slot2" Margin="74,-2,-102,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" PreviewTextInput="TextEntryNumeric" DataObject.Pasting="TextPasteNumeric" x:Name="Shelf6Slot3" Margin="110,-2,-138,10" Padding="0,0,-2,-12" MaxLength="2" />
                 </FixedPage>
                 <FixedPage Margin="348,324,-488,-342" Background="Transparent">
                     <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="5" Margin="1,-2,-33,10" TextAlignment="Center" />
-                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf5Slot1" Margin="38,-2,-66,10" Padding="0,0,-2,-12" MaxLength="2" />
-                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf5Slot2" Margin="74,-2,-102,10" Padding="0,0,-2,-12" MaxLength="2" />
-                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf5Slot3" Margin="110,-2,-138,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" PreviewTextInput="TextEntryNumeric" DataObject.Pasting="TextPasteNumeric" x:Name="Shelf5Slot1" Margin="38,-2,-66,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" PreviewTextInput="TextEntryNumeric" DataObject.Pasting="TextPasteNumeric" x:Name="Shelf5Slot2" Margin="74,-2,-102,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" PreviewTextInput="TextEntryNumeric" DataObject.Pasting="TextPasteNumeric" x:Name="Shelf5Slot3" Margin="110,-2,-138,10" Padding="0,0,-2,-12" MaxLength="2" />
                 </FixedPage>
                 <FixedPage Margin="348,346,-488,-364" Background="Transparent">
                     <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="4" Margin="1,-2,-33,10" TextAlignment="Center" />
-                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf4Slot1" Margin="38,-2,-66,10" Padding="0,0,-2,-12" MaxLength="2" />
-                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf4Slot2" Margin="74,-2,-102,10" Padding="0,0,-2,-12" MaxLength="2" />
-                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf4Slot3" Margin="110,-2,-138,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" PreviewTextInput="TextEntryNumeric" DataObject.Pasting="TextPasteNumeric" x:Name="Shelf4Slot1" Margin="38,-2,-66,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" PreviewTextInput="TextEntryNumeric" DataObject.Pasting="TextPasteNumeric" x:Name="Shelf4Slot2" Margin="74,-2,-102,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" PreviewTextInput="TextEntryNumeric" DataObject.Pasting="TextPasteNumeric" x:Name="Shelf4Slot3" Margin="110,-2,-138,10" Padding="0,0,-2,-12" MaxLength="2" />
                 </FixedPage>
                 <FixedPage Margin="348,368,-488,-386" Background="Transparent">
                     <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="3" Margin="1,-2,-33,10" TextAlignment="Center" />
-                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf3Slot1" Margin="38,-2,-66,10" Padding="0,0,-2,-12" MaxLength="2" />
-                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf3Slot2" Margin="74,-2,-102,10" Padding="0,0,-2,-12" MaxLength="2" />
-                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf3Slot3" Margin="110,-2,-138,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" PreviewTextInput="TextEntryNumeric" DataObject.Pasting="TextPasteNumeric" x:Name="Shelf3Slot1" Margin="38,-2,-66,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" PreviewTextInput="TextEntryNumeric" DataObject.Pasting="TextPasteNumeric" x:Name="Shelf3Slot2" Margin="74,-2,-102,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" PreviewTextInput="TextEntryNumeric" DataObject.Pasting="TextPasteNumeric" x:Name="Shelf3Slot3" Margin="110,-2,-138,10" Padding="0,0,-2,-12" MaxLength="2" />
                 </FixedPage>
                 <FixedPage Margin="348,390,-488,-408" Background="Transparent">
                     <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="2" Margin="1,-2,-33,10" TextAlignment="Center" />
-                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf2Slot1" Margin="38,-2,-66,10" Padding="0,0,-2,-12" MaxLength="2" />
-                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf2Slot2" Margin="74,-2,-102,10" Padding="0,0,-2,-12" MaxLength="2" />
-                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf2Slot3" Margin="110,-2,-138,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" PreviewTextInput="TextEntryNumeric" DataObject.Pasting="TextPasteNumeric" x:Name="Shelf2Slot1" Margin="38,-2,-66,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" PreviewTextInput="TextEntryNumeric" DataObject.Pasting="TextPasteNumeric" x:Name="Shelf2Slot2" Margin="74,-2,-102,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" PreviewTextInput="TextEntryNumeric" DataObject.Pasting="TextPasteNumeric" x:Name="Shelf2Slot3" Margin="110,-2,-138,10" Padding="0,0,-2,-12" MaxLength="2" />
                 </FixedPage>
                 <FixedPage Margin="348,412,-488,-430" Background="Transparent">
                     <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="1" Margin="1,-2,-33,10" TextAlignment="Center" />
-                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf1Slot1" Margin="38,-2,-66,10" Padding="0,0,-2,-12" MaxLength="2" />
-                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf1Slot2" Margin="74,-2,-102,10" Padding="0,0,-2,-12" MaxLength="2" />
-                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf1Slot3" Margin="110,-2,-138,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" PreviewTextInput="TextEntryNumeric" DataObject.Pasting="TextPasteNumeric" x:Name="Shelf1Slot1" Margin="38,-2,-66,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" PreviewTextInput="TextEntryNumeric" DataObject.Pasting="TextPasteNumeric" x:Name="Shelf1Slot2" Margin="74,-2,-102,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" PreviewTextInput="TextEntryNumeric" DataObject.Pasting="TextPasteNumeric" x:Name="Shelf1Slot3" Margin="110,-2,-138,10" Padding="0,0,-2,-12" MaxLength="2" />
                 </FixedPage>
                 <FixedPage Margin="348,434,-488,-452" Background="Transparent">
                     <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="0" Margin="1,-2,-33,10" TextAlignment="Center" />
-                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf0Slot1" Margin="38,-2,-66,10" Padding="0,0,-2,-12" MaxLength="2" />
-                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf0Slot2" Margin="74,-2,-102,10" Padding="0,0,-2,-12" MaxLength="2" />
-                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf0Slot3" Margin="110,-2,-138,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" PreviewTextInput="TextEntryNumeric" DataObject.Pasting="TextPasteNumeric" x:Name="Shelf0Slot1" Margin="38,-2,-66,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" PreviewTextInput="TextEntryNumeric" DataObject.Pasting="TextPasteNumeric" x:Name="Shelf0Slot2" Margin="74,-2,-102,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" PreviewTextInput="TextEntryNumeric" DataObject.Pasting="TextPasteNumeric" x:Name="Shelf0Slot3" Margin="110,-2,-138,10" Padding="0,0,-2,-12" MaxLength="2" />
                 </FixedPage>
             </FixedPage>
             <FixedPage x:Name="FindingPage" Visibility="Hidden">

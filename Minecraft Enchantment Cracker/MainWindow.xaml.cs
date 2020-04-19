@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -25,6 +27,7 @@ namespace Minecraft_Enchantment_Cracker {
     public partial class MainWindow : Window {
         public static MinecraftData.MinecraftVersion MinecraftVersion = MinecraftData.MinecraftVersion.VERSIONS[5];
         public static bool[][] avail = MinecraftData.GetAvailability(MainWindow.MinecraftVersion);
+        public static TextBox[][] shelves = new TextBox[16][];
 
         public static (int x, int y) ItemSelection = (5,6);
         public static int CurrentTab = 0;
@@ -45,6 +48,23 @@ namespace Minecraft_Enchantment_Cracker {
 
         public MainWindow() {
             InitializeComponent();
+            
+            shelves[0] = new TextBox[] { Shelf0Slot1, Shelf0Slot2, Shelf0Slot3 };
+            shelves[1] = new TextBox[] { Shelf1Slot1, Shelf1Slot2, Shelf1Slot3 };
+            shelves[2] = new TextBox[] { Shelf2Slot1, Shelf2Slot2, Shelf2Slot3 };
+            shelves[3] = new TextBox[] { Shelf3Slot1, Shelf3Slot2, Shelf3Slot3 };
+            shelves[4] = new TextBox[] { Shelf4Slot1, Shelf4Slot2, Shelf4Slot3 };
+            shelves[5] = new TextBox[] { Shelf5Slot1, Shelf5Slot2, Shelf5Slot3 };
+            shelves[6] = new TextBox[] { Shelf6Slot1, Shelf6Slot2, Shelf6Slot3 };
+            shelves[7] = new TextBox[] { Shelf7Slot1, Shelf7Slot2, Shelf7Slot3 };
+            shelves[8] = new TextBox[] { Shelf8Slot1, Shelf8Slot2, Shelf8Slot3 };
+            shelves[9] = new TextBox[] { Shelf9Slot1, Shelf9Slot2, Shelf9Slot3 };
+            shelves[10] = new TextBox[] { Shelf10Slot1, Shelf10Slot2, Shelf10Slot3 };
+            shelves[11] = new TextBox[] { Shelf11Slot1, Shelf11Slot2, Shelf11Slot3 };
+            shelves[12] = new TextBox[] { Shelf12Slot1, Shelf12Slot2, Shelf12Slot3 };
+            shelves[13] = new TextBox[] { Shelf13Slot1, Shelf13Slot2, Shelf13Slot3 };
+            shelves[14] = new TextBox[] { Shelf14Slot1, Shelf14Slot2, Shelf14Slot3 };
+            shelves[15] = new TextBox[] { Shelf15Slot1, Shelf15Slot2, Shelf15Slot3 };
 
             Task.Run(() => {
                 Debug.WriteLine("Running tester");
@@ -68,18 +88,15 @@ namespace Minecraft_Enchantment_Cracker {
                 bool success;
                 SolidColorBrush red = new SolidColorBrush((Color)ColorConverter.ConvertFromString("LightPink"));
                 SolidColorBrush green = new SolidColorBrush((Color)ColorConverter.ConvertFromString("LightGreen"));
-                // sometimes errors when starting up - perhaps UI elements are null?
                 while (true) {
-                    try {
-                        success = ProgressTask.Success;
-                        float p = success ? ProgressTask.Progress : 1f;
-                        ProgressBar.Value = p;
-                        ProgressBar.Foreground = success ? green : red;
-                        ProgressText.Text = ProgressTask.ProgressText;
-                        ProgressPercent.Text = ProgressTask.ProgressText2;
-                    }
-                    catch (Exception) { }
-                    await Task.Delay(50);
+                    success = ProgressTask.Success;
+                    float p = success ? ProgressTask.Progress : 1f;
+                    if (float.IsNaN(p)) p = 0f;
+                    ProgressBar.Value = p;
+                    ProgressBar.Foreground = success ? green : red;
+                    ProgressText.Text = ProgressTask.ProgressText;
+                    ProgressPercent.Text = ProgressTask.ProgressText2;
+                    await Task.Delay(10);
                 }
             });
         }
@@ -104,8 +121,19 @@ namespace Minecraft_Enchantment_Cracker {
             Keyboard.ClearFocus();
         }
 
-        private void TextBox_TextInput(object sender, TextCompositionEventArgs e) {
+        public static bool IsNumeric(string text) {
+            return text.All(c => Char.IsDigit(c));
+        }
+        
+        private void TextEntryNumeric(object sender, TextCompositionEventArgs e) {
+            e.Handled = !IsNumeric(e.Text);
+        }
 
+        private void TextPasteNumeric(object sender, DataObjectPastingEventArgs e) {
+            if (e.DataObject.GetDataPresent(typeof(string))) {
+                if (!IsNumeric((string)e.DataObject.GetData(typeof(string)))) e.CancelCommand();
+            }
+            else e.CancelCommand();
         }
 
         private void ButtonClose_Click(object sender, RoutedEventArgs e) {
