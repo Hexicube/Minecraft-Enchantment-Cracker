@@ -1,19 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Minecraft_Enchantment_Cracker {
     public class ItemBackgroundCanvas : Canvas {
@@ -77,7 +68,10 @@ namespace Minecraft_Enchantment_Cracker {
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e) {
-            if (e.ChangedButton == MouseButton.Left) this.DragMove();
+            if (e.ChangedButton == MouseButton.Left) {
+                Point p = e.GetPosition(sender as IInputElement);
+                if (p.Y < 30) this.DragMove();
+            }
         }
 
         private void ButtonClose_Click(object sender, RoutedEventArgs e) {

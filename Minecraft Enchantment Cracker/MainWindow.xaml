@@ -23,7 +23,8 @@
         <ImageBrush ImageSource="{StaticResource BackgroundImage}"/>
     </Window.Background>
     <FixedPage Background="Transparent">
-        <Button Margin="474,8,-492,-26" BorderThickness="0" Click="ButtonClose_Click" Focusable="False" Template="{DynamicResource BaseButtonNoHover}">
+        <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="Enchantment Cracker" Margin="10,6,10,14" Background="Transparent" />
+        <Button Margin="474,8,-492,-26" BorderThickness="0" Click="ButtonClose_Click" Template="{DynamicResource BaseButtonNoHover}">
             <Button.Resources>
                 <ImageBrush x:Key="CloseUnpressedBrush" ImageSource="./close1.png" />
                 <ImageBrush x:Key="ClosePressedBrush" ImageSource="./close2.png" />
@@ -39,10 +40,10 @@
                 </Style>
             </Button.Style>
         </Button>
-        <ProgressBar x:Name="ProgressBar" Value=".5" Maximum="1" Background="Transparent" Foreground="LightGreen" BorderThickness="0" Margin="12,270,-488,-288" />
-        <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="12345/67890" x:Name="ProgressText" Margin="14,268,-250,-220" Background="Transparent" />
-        <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="12%" x:Name="ProgressPercent" Margin="250,268,-488,-288" Background="Transparent" TextAlignment="Right" />
-        <local:ItemBackgroundCanvas x:Name="ItemCanvas" Margin="10,10,-333,-261">
+        <ProgressBar x:Name="ProgressBar" Value=".5" Maximum="1" Background="Transparent" Foreground="LightGreen" BorderThickness="0" Margin="12,370,-488,-388" />
+        <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="12345/67890" x:Name="ProgressText" Margin="14,368,-250,-320" Background="Transparent" />
+        <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="12%" x:Name="ProgressPercent" Margin="250,368,-488,-388" Background="Transparent" TextAlignment="Right" />
+        <local:ItemBackgroundCanvas x:Name="ItemCanvas" Margin="10,40,-333,-291">
             <Image Source="./items.png" MouseLeftButtonDown="Image_MouseLeftButtonDown" />
         </local:ItemBackgroundCanvas>
     </FixedPage>
