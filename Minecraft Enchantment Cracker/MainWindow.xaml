@@ -23,6 +23,7 @@
         <ImageBrush ImageSource="{StaticResource BackgroundImage}"/>
     </Window.Background>
     <FixedPage Background="Transparent">
+        <!-- Title bar -->
         <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="Enchantment Cracker" Margin="10,6,10,14" Background="Transparent" />
         <Button Margin="474,8,-492,-26" BorderThickness="0" Click="ButtonClose_Click" Template="{DynamicResource BaseButtonNoHover}">
             <Button.Resources>
@@ -40,11 +41,129 @@
                 </Style>
             </Button.Style>
         </Button>
-        <ProgressBar x:Name="ProgressBar" Value=".5" Maximum="1" Background="Transparent" Foreground="LightGreen" BorderThickness="0" Margin="12,370,-488,-388" />
-        <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="12345/67890" x:Name="ProgressText" Margin="14,368,-250,-320" Background="Transparent" />
-        <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="12%" x:Name="ProgressPercent" Margin="250,368,-488,-388" Background="Transparent" TextAlignment="Right" />
-        <local:ItemBackgroundCanvas x:Name="ItemCanvas" Margin="10,40,-333,-291">
-            <Image Source="./items.png" MouseLeftButtonDown="Image_MouseLeftButtonDown" />
-        </local:ItemBackgroundCanvas>
+        <!-- Progress bar -->
+        <ProgressBar x:Name="ProgressBar" Value=".5" Maximum="1" Background="Transparent" Foreground="LightGreen" BorderThickness="0" Margin="12,460,-488,-478" />
+        <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="12345/67890" x:Name="ProgressText" Margin="14,458,-250,-478" Background="Transparent" />
+        <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="12%" x:Name="ProgressPercent" Margin="250,458,-488,-478" Background="Transparent" TextAlignment="Right" />
+        <!-- Content -->
+        <FixedPage>
+            <FixedPage x:Name="CrackingPage">
+                <Image Source="./tab1.png" Margin="0,28,0,-28" />
+                <Image Source="./bg1.png" Margin="10,66,-480,-298" />
+                <!-- Enchanting table value input -->
+                <FixedPage Margin="348,104,-488,-122" Background="Transparent">
+                    <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="15" Margin="1,-2,-33,10" TextAlignment="Center" />
+                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf15Slot1" Margin="38,-2,-66,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf15Slot2" Margin="74,-2,-102,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf15Slot3" Margin="110,-2,-138,10" Padding="0,0,-2,-12" MaxLength="2" />
+                </FixedPage>
+                <FixedPage Margin="348,126,-488,-144" Background="Transparent">
+                    <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="14" Margin="1,-2,-33,10" TextAlignment="Center" />
+                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf14Slot1" Margin="38,-2,-66,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf14Slot2" Margin="74,-2,-102,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf14Slot3" Margin="110,-2,-138,10" Padding="0,0,-2,-12" MaxLength="2" />
+                </FixedPage>
+                <FixedPage Margin="348,148,-488,-166" Background="Transparent">
+                    <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="13" Margin="1,-2,-33,10" TextAlignment="Center" />
+                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf13Slot1" Margin="38,-2,-66,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf13Slot2" Margin="74,-2,-102,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf13Slot3" Margin="110,-2,-138,10" Padding="0,0,-2,-12" MaxLength="2" />
+                </FixedPage>
+                <FixedPage Margin="348,170,-488,-188" Background="Transparent">
+                    <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="12" Margin="1,-2,-33,10" TextAlignment="Center" />
+                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf12Slot1" Margin="38,-2,-66,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf12Slot2" Margin="74,-2,-102,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf12Slot3" Margin="110,-2,-138,10" Padding="0,0,-2,-12" MaxLength="2" />
+                </FixedPage>
+                <FixedPage Margin="348,192,-488,-210" Background="Transparent">
+                    <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="11" Margin="1,-2,-33,10" TextAlignment="Center" />
+                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf11Slot1" Margin="38,-2,-66,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf11Slot2" Margin="74,-2,-102,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf11Slot3" Margin="110,-2,-138,10" Padding="0,0,-2,-12" MaxLength="2" />
+                </FixedPage>
+                <FixedPage Margin="348,214,-488,-232" Background="Transparent">
+                    <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="10" Margin="1,-2,-33,10" TextAlignment="Center" />
+                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf10Slot1" Margin="38,-2,-66,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf10Slot2" Margin="74,-2,-102,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf10Slot3" Margin="110,-2,-138,10" Padding="0,0,-2,-12" MaxLength="2" />
+                </FixedPage>
+                <FixedPage Margin="348,236,-488,-254" Background="Transparent">
+                    <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="9" Margin="1,-2,-33,10" TextAlignment="Center" />
+                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf9Slot1" Margin="38,-2,-66,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf9Slot2" Margin="74,-2,-102,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf9Slot3" Margin="110,-2,-138,10" Padding="0,0,-2,-12" MaxLength="2" />
+                </FixedPage>
+                <FixedPage Margin="348,258,-488,-276" Background="Transparent">
+                    <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="8" Margin="1,-2,-33,10" TextAlignment="Center" />
+                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf8Slot1" Margin="38,-2,-66,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf8Slot2" Margin="74,-2,-102,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf8Slot3" Margin="110,-2,-138,10" Padding="0,0,-2,-12" MaxLength="2" />
+                </FixedPage>
+                <FixedPage Margin="348,280,-488,-298" Background="Transparent">
+                    <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="7" Margin="1,-2,-33,10" TextAlignment="Center" />
+                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf7Slot1" Margin="38,-2,-66,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf7Slot2" Margin="74,-2,-102,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf7Slot3" Margin="110,-2,-138,10" Padding="0,0,-2,-12" MaxLength="2" />
+                </FixedPage>
+                <FixedPage Margin="348,302,-488,-320" Background="Transparent">
+                    <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="6" Margin="1,-2,-33,10" TextAlignment="Center" />
+                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf6Slot1" Margin="38,-2,-66,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf6Slot2" Margin="74,-2,-102,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf6Slot3" Margin="110,-2,-138,10" Padding="0,0,-2,-12" MaxLength="2" />
+                </FixedPage>
+                <FixedPage Margin="348,324,-488,-342" Background="Transparent">
+                    <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="5" Margin="1,-2,-33,10" TextAlignment="Center" />
+                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf5Slot1" Margin="38,-2,-66,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf5Slot2" Margin="74,-2,-102,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf5Slot3" Margin="110,-2,-138,10" Padding="0,0,-2,-12" MaxLength="2" />
+                </FixedPage>
+                <FixedPage Margin="348,346,-488,-364" Background="Transparent">
+                    <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="4" Margin="1,-2,-33,10" TextAlignment="Center" />
+                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf4Slot1" Margin="38,-2,-66,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf4Slot2" Margin="74,-2,-102,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf4Slot3" Margin="110,-2,-138,10" Padding="0,0,-2,-12" MaxLength="2" />
+                </FixedPage>
+                <FixedPage Margin="348,368,-488,-386" Background="Transparent">
+                    <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="3" Margin="1,-2,-33,10" TextAlignment="Center" />
+                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf3Slot1" Margin="38,-2,-66,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf3Slot2" Margin="74,-2,-102,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf3Slot3" Margin="110,-2,-138,10" Padding="0,0,-2,-12" MaxLength="2" />
+                </FixedPage>
+                <FixedPage Margin="348,390,-488,-408" Background="Transparent">
+                    <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="2" Margin="1,-2,-33,10" TextAlignment="Center" />
+                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf2Slot1" Margin="38,-2,-66,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf2Slot2" Margin="74,-2,-102,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf2Slot3" Margin="110,-2,-138,10" Padding="0,0,-2,-12" MaxLength="2" />
+                </FixedPage>
+                <FixedPage Margin="348,412,-488,-430" Background="Transparent">
+                    <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="1" Margin="1,-2,-33,10" TextAlignment="Center" />
+                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf1Slot1" Margin="38,-2,-66,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf1Slot2" Margin="74,-2,-102,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf1Slot3" Margin="110,-2,-138,10" Padding="0,0,-2,-12" MaxLength="2" />
+                </FixedPage>
+                <FixedPage Margin="348,434,-488,-452" Background="Transparent">
+                    <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="0" Margin="1,-2,-33,10" TextAlignment="Center" />
+                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf0Slot1" Margin="38,-2,-66,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf0Slot2" Margin="74,-2,-102,10" Padding="0,0,-2,-12" MaxLength="2" />
+                    <TextBox Style="{DynamicResource NumberBox}" x:Name="Shelf0Slot3" Margin="110,-2,-138,10" Padding="0,0,-2,-12" MaxLength="2" />
+                </FixedPage>
+            </FixedPage>
+            <FixedPage x:Name="FindingPage" Visibility="Hidden">
+                <Image Source="./tab2.png" Margin="0,28,0,-28" />
+                <local:ItemBackgroundCanvas x:Name="ItemCanvas" Margin="10,60,-333,-311">
+                    <Image Source="./items.png" MouseLeftButtonDown="Image_MouseLeftButtonDown" />
+                </local:ItemBackgroundCanvas>
+            </FixedPage>
+            <FixedPage x:Name="InfoPage" Visibility="Hidden">
+                <Image Source="./tab3.png" Margin="0,28,0,-28" />
+                <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="Enchantment Cracker V0.1" Margin="10,62,10,-42" Background="Transparent" />
+                <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="Original version by Earthcomputer" Margin="10,86,10,-66" Background="Transparent" />
+                <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="Updated version by Hexicube" Margin="10,110,10,-90" Background="Transparent" />
+            </FixedPage>
+        </FixedPage>
+        <!-- Tab text (needs to be below content) -->
+        <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="Seed Finder" Margin="10,34,10,-14" Background="Transparent" />
+        <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="Enchanter" Margin="176,34,-156,-14" Background="Transparent" />
+        <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="About" Margin="342,34,-322,-14" Background="Transparent" />
     </FixedPage>
 </Window>

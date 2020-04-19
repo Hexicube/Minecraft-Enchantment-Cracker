@@ -76,7 +76,7 @@ namespace Minecraft_Enchantment_Cracker {
         }
     }
 
-    public class Cracker : IProgressiveTask {
+    public class CrackerTask : IProgressiveTask {
         public class IntArray {
             private int[] values;
             private int size = 0;
