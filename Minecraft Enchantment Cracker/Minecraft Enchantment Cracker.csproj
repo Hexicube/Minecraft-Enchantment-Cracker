@@ -14,6 +14,7 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -60,6 +61,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="JavaRandom.cs" />
+    <Compile Include="Tasks\IntArray.cs" />
     <Compile Include="Tasks\ItemFinderTask.cs" />
     <Compile Include="Tasks\VersionTask.cs" />
     <Page Include="MainWindow.xaml">
@@ -92,35 +95,25 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Resource Include="Minecraftia-Regular.ttf" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Resource Include="enchanted_book.ico" />
+    <Resource Include="Minecraftia-Regular.ttf" />
+    <Resource Include="Resources\background.png" />
+    <Resource Include="Resources\bg1.png" />
+    <Resource Include="Resources\close1.png" />
+    <Resource Include="Resources\close2.png" />
+    <Resource Include="Resources\items.png" />
+    <Resource Include="Resources\tab3.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="background.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="close1.png" />
-    <Resource Include="close2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="items.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="tab1.png" />
-    <Resource Include="tab2.png" />
-    <Resource Include="tab3.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bg1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="enchanted_book.ico" />
+    <Resource Include="Resources\tab1.png" />
+    <Resource Include="Resources\tab2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -11,7 +11,7 @@
         WindowStyle="None"
         MouseDown="Window_MouseDown">
     <Window.Resources>
-        <BitmapImage x:Key="BackgroundImage" UriSource="./background.png" />
+        <BitmapImage x:Key="BackgroundImage" UriSource="Resources/background.png" />
     </Window.Resources>
     <Window.Width>
         <Binding Source="{StaticResource BackgroundImage}" Path="PixelWidth" />
@@ -27,8 +27,8 @@
         <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="Enchantment Cracker" Margin="10,6,10,14" Background="Transparent" />
         <Button Margin="474,8,-492,-26" BorderThickness="0" Click="ButtonClose_Click" Template="{DynamicResource BaseButtonNoHover}">
             <Button.Resources>
-                <ImageBrush x:Key="CloseUnpressedBrush" ImageSource="./close1.png" />
-                <ImageBrush x:Key="ClosePressedBrush" ImageSource="./close2.png" />
+                <ImageBrush x:Key="CloseUnpressedBrush" ImageSource="Resources/close1.png" />
+                <ImageBrush x:Key="ClosePressedBrush" ImageSource="Resources/close2.png" />
             </Button.Resources>
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
@@ -48,8 +48,8 @@
         <!-- Content -->
         <FixedPage>
             <FixedPage x:Name="CrackingPage">
-                <Image Source="./tab1.png" Margin="0,28,0,-28" />
-                <Image Source="./bg1.png" Margin="10,66,-480,-298" />
+                <Image Source="Resources/tab1.png" Margin="0,28,0,-28" />
+                <Image Source="Resources/bg1.png" Margin="10,66,-480,-298" />
                 <!-- Enchanting table value input -->
                 <FixedPage Margin="348,104,-488,-122" Background="Transparent">
                     <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="15" Margin="1,-2,-33,10" TextAlignment="Center" />
@@ -149,13 +149,13 @@
                 </FixedPage>
             </FixedPage>
             <FixedPage x:Name="FindingPage" Visibility="Hidden">
-                <Image Source="./tab2.png" Margin="0,28,0,-28" />
+                <Image Source="Resources/tab2.png" Margin="0,28,0,-28" />
                 <local:ItemBackgroundCanvas x:Name="ItemCanvas" Margin="10,60,-333,-311">
-                    <Image Source="./items.png" MouseLeftButtonDown="Image_MouseLeftButtonDown" />
+                    <Image Source="Resources/items.png" MouseLeftButtonDown="Image_MouseLeftButtonDown" />
                 </local:ItemBackgroundCanvas>
             </FixedPage>
             <FixedPage x:Name="InfoPage" Visibility="Hidden">
-                <Image Source="./tab3.png" Margin="0,28,0,-28" />
+                <Image Source="Resources/tab3.png" Margin="0,28,0,-28" />
                 <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="Enchantment Cracker V0.1" Margin="10,62,10,-42" Background="Transparent" />
                 <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="Original version by Earthcomputer" Margin="10,86,10,-66" Background="Transparent" />
                 <TextBlock FontFamily="./#Minecraftia" FontSize="16" Text="Updated version by Hexicube" Margin="10,110,10,-90" Background="Transparent" />
