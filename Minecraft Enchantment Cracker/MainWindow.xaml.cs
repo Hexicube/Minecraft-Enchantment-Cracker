@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
@@ -123,19 +124,19 @@ namespace Minecraft_Enchantment_Cracker
             Debug.WriteLine("Running tester");
 
             long start = Environment.TickCount;
-            int[] values = SeedCracker.GetSeeds(15, 7, 17, 30, null);
+            List<int> values = SeedCracker.GetSeeds(15, 7, 17, 30, null);
             Debug.WriteLine($"Took {Environment.TickCount - start}ms");
-            Debug.WriteLine($"Expected: 81788565 | Actual: {values.Length}");
-            if(values.Length == 81788565)
+            Debug.WriteLine($"Expected: 81788565 | Actual: {values.Count}");
+            if(values.Count == 81788565)
             {
                 Debug.WriteLine("First run OK");
                 Task.Delay(2500).Wait();
 
                 start = Environment.TickCount;
-                int[] values2 = SeedCracker.GetSeeds(14, 7, 15, 28, values);
+                List<int> values2 = SeedCracker.GetSeeds(14, 7, 15, 28, values);
                 Debug.WriteLine($"Took {Environment.TickCount - start}ms");
-                Debug.WriteLine($"Expected: 2073151 | Actual: {values2.Length}");
-                if(values2.Length == 2073151)
+                Debug.WriteLine($"Expected: 2073151 | Actual: {values2.Count}");
+                if(values2.Count == 2073151)
                     Debug.WriteLine("Second run OK");
             }
         }

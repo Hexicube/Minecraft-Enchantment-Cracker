@@ -1,11 +1,9 @@
-﻿namespace Minecraft_Enchantment_Cracker {
-    public static class JavaRandom {
+﻿namespace Minecraft_Enchantment_Cracker
+{
+    public static class JavaRandom
+    {
         public const long M    = 0x5DEECE66DL;
         public const long Mask = (1L << 48) - 1;
-        
-        public static long GetSeed(int s) {
-            return (s ^ M) & Mask;
-        }
 
         public static int NextInt(this ref long seed, int max) {
             seed = (seed * M + 0xBL) & Mask;
