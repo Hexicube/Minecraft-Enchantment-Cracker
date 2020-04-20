@@ -290,8 +290,9 @@ namespace Minecraft_Enchantment_Cracker {
                         while (true) {
                             do {
                                 initial = progressAmt;
-                                if (initial == int.MinValue) return;
+                                if (initial == int.MaxValue) return;
                                 computed = progressAmt + BLOCK_SIZE;
+                                if (computed == int.MinValue) computed = int.MaxValue;
                             }
                             while (initial != Interlocked.CompareExchange(ref progressAmt, computed, initial));
                             FindSeeds(shelves, slot1, slot2, slot3, result, initial, BLOCK_SIZE, storage);
@@ -302,14 +303,17 @@ namespace Minecraft_Enchantment_Cracker {
                 }
                 int init, comp;
                 IntArray store = new IntArray(BLOCK_SIZE);
+                FindSeeds(shelves, slot1, slot2, slot3, result, int.MinValue, BLOCK_SIZE, store);
+                progressAmt += BLOCK_SIZE;
+                started = true;
                 while (true) {
                     do {
                         init = progressAmt;
-                        if (init == int.MinValue && started) goto outer;
+                        if (init == int.MaxValue) goto outer;
                         comp = progressAmt + BLOCK_SIZE;
+                        if (comp == int.MinValue) comp = int.MaxValue;
                     }
                     while (init != Interlocked.CompareExchange(ref progressAmt, comp, init));
-                    started = true;
                     FindSeeds(shelves, slot1, slot2, slot3, result, init, BLOCK_SIZE, store);
                 }
                 outer: 
