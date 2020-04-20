@@ -1,44 +1,7 @@
 ﻿using System;
-using System.Diagnostics;
 
 namespace Minecraft_Enchantment_Cracker.Tasks {
     public class CrackerTask : IProgressiveTask {
-        public class IntArray {
-            private int[] values;
-            private int size = 0;
-
-            public IntArray(int startSize = 1000000) {
-                values = new int[startSize];
-            }
-
-            public void AddValue(int v) {
-                if (size == values.Length) {
-                    Debug.WriteLine($"Exceeded size: {size}");
-                    int[] newValues = new int[values.Length + 1000000];
-                    Array.Copy(values, newValues, values.Length);
-                    values = newValues;
-                }
-                values[size++] = v;
-            }
-
-            public void AddAllValues(int[] v) {
-                if (size + v.Length > values.Length) {
-                    int[] newValues = new int[values.Length + v.Length];
-                    Array.Copy(values, newValues, values.Length);
-                    Array.Copy(v, 0, newValues, values.Length, v.Length);
-                    values = newValues;
-                }
-                else Array.Copy(v, 0, values, size, v.Length);
-                size += v.Length;
-            }
-
-            public int[] GetValues() {
-                int[] ret = new int[size];
-                Array.Copy(values, ret, size);
-                return ret;
-            }
-        }
-
         private static int GetGenericEnchantability(ref long random, int shelves) {
             int first = random.NextInt(8);
             int second = random.NextInt(shelves+1);
