@@ -60,8 +60,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="JavaRandom.cs" />
     <Compile Include="Tasks\ItemFinderTask.cs" />
-    <Compile Include="Tasks\JavaRandom.cs" />
     <Compile Include="Tasks\VersionTask.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -1,4 +1,5 @@
 ﻿using Minecraft_Enchantment_Cracker;
+using Minecraft_Enchantment_Cracker.Tasks;
 using NUnit.Framework;
 
 [assembly: Parallelizable(ParallelScope.Fixtures)]
