@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Minecraft_Enchantment_Cracker.Tasks;
 using NUnit.Framework;
 
@@ -21,7 +22,7 @@ namespace Tests
                 int expectedSeeds
             )
             {
-                List<int> results = new CrackerTask().GetSeeds(shelves, slot1, slot2, slot3, priorSeeds);
+                SynchronizedCollection<int> results = new CrackerTask().GetSeeds(shelves, slot1, slot2, slot3, priorSeeds);
                 Assert.AreEqual(expectedSeeds, results.Count);
             }
 
@@ -41,9 +42,9 @@ namespace Tests
             )
             {
                 var cracker = new CrackerTask();
-                List<int> results = cracker.GetSeeds(shelves1, s11, s21, s31, priorSeeds);
+                SynchronizedCollection<int> results = cracker.GetSeeds(shelves1, s11, s21, s31, priorSeeds);
                 Assert.AreEqual(expected1, results.Count);
-                List<int> results2 = cracker.GetSeeds(shelves2, s12, s22, s32, results);
+                SynchronizedCollection<int> results2 = cracker.GetSeeds(shelves2, s12, s22, s32, results.ToList());
                 Assert.AreEqual(expected2, results2.Count);
             }
 
@@ -65,11 +66,11 @@ namespace Tests
             )
             {
                 var cracker = new CrackerTask();
-                List<int> results = null;
+                SynchronizedCollection<int> results = null;
                 var len = shelves.Length;
                 for(var i = 0; i < len; ++i)
                 {
-                    results = cracker.GetSeeds(shelves[i], slots1[i], slots2[i], slots3[i], results);
+                    results = cracker.GetSeeds(shelves[i], slots1[i], slots2[i], slots3[i], results?.ToList());
                     Assert.AreEqual(seedCounts[i], results.Count);
                 }
 

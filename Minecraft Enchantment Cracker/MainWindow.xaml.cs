@@ -124,7 +124,7 @@ namespace Minecraft_Enchantment_Cracker
             Debug.WriteLine("Running tester");
 
             long start = Environment.TickCount;
-            List<int> values = SeedCracker.GetSeeds(15, 7, 17, 30, null);
+            SynchronizedCollection<int> values = SeedCracker.GetSeeds(15, 7, 17, 30, null);
             Debug.WriteLine($"Took {Environment.TickCount - start}ms");
             Debug.WriteLine($"Expected: 81788565 | Actual: {values.Count}");
             if(values.Count == 81788565)
@@ -133,7 +133,7 @@ namespace Minecraft_Enchantment_Cracker
                 Task.Delay(2500).Wait();
 
                 start = Environment.TickCount;
-                List<int> values2 = SeedCracker.GetSeeds(14, 7, 15, 28, values);
+                SynchronizedCollection<int> values2 = SeedCracker.GetSeeds(14, 7, 15, 28, values.ToList());
                 Debug.WriteLine($"Took {Environment.TickCount - start}ms");
                 Debug.WriteLine($"Expected: 2073151 | Actual: {values2.Count}");
                 if(values2.Count == 2073151)
