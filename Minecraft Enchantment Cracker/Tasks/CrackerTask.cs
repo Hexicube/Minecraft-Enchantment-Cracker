@@ -150,13 +150,13 @@ namespace Minecraft_Enchantment_Cracker {
         private int TheSeed;
         private long LastSearchTime = 0;
         private string LongToQty(long v) {
-            if (v > 1000000000) return $"{(v/1000000000f).ToString("0.00")}B";
-            if (v > 100000000) return $"{(v/1000000f).ToString("000")}M";
-            if (v > 10000000) return $"{(v/1000000f).ToString("00.0")}M";
-            if (v > 1000000) return $"{(v/1000000f).ToString("0.00")}M";
-            if (v > 100000) return $"{(v/1000f).ToString("000")}K";
-            if (v > 10000) return $"{(v/1000f).ToString("00.0")}K";
-            if (v > 1000) return $"{(v/1000f).ToString("0.00")}K";
+            if (v > 1000000000) return $"{(v/1000000000f):0.00}B";
+            if (v >  100000000) return $"{(v/   1000000f) :000}M";
+            if (v >   10000000) return $"{(v/   1000000f):00.0}M";
+            if (v >    1000000) return $"{(v/   1000000f):0.00}M";
+            if (v >     100000) return $"{(v/      1000f) :000}K";
+            if (v >      10000) return $"{(v/      1000f):00.0}K";
+            if (v >       1000) return $"{(v/      1000f):0.00}K";
             return $"{v}";
         }
         public string ProgressText { get {
@@ -166,13 +166,13 @@ namespace Minecraft_Enchantment_Cracker {
                 return $"{LongToQty(progressAmt)} / {LongToQty(progressMax)}";
             }
             if (LastSeedsFound == 0) return "No seeds found";
-            if (LastSeedsFound == 1) return $"Seed: {TheSeed.ToString("X8")}";
+            if (LastSeedsFound == 1) return $"Seed: {TheSeed:X8}";
             return $"Seeds found: {LongToQty(LastSeedsFound)}";
         } }
         public string ProgressText2 { get {
             if (progressMax == -2) return "";
-            if (LastSeedsFound == -1) return $"{((int)(Progress*100)).ToString("00")}%";
-            return $"Took {(LastSearchTime/1000f).ToString("0.0")}s";
+            if (LastSeedsFound == -1) return $"{(int)(Progress*100):00}%";
+            return $"Took {(LastSearchTime/1000f):0.0}s";
         } }
         
         private static void FindSeeds(int shelves, int slot1, int slot2, int slot3, IntArray result, int start, int blockSize, IntArray storage) {
