@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Minecraft_Enchantment_Cracker {
@@ -111,6 +112,10 @@ namespace Minecraft_Enchantment_Cracker {
                 Array.Copy(values, ret, size);
                 return ret;
             }
+
+            public void Clear() {
+                size = 0;
+            }
         }
 
         private static int GetGenericEnchantability(ref long random, int shelves) {
@@ -166,6 +171,82 @@ namespace Minecraft_Enchantment_Cracker {
             if (LastSeedsFound == -1) return $"{((int)(Progress*100)).ToString("00")}%";
             return $"Took {(LastSearchTime/1000f).ToString("0.0")}s";
         } }
+        
+        private static void FindSeeds(int shelves, int slot1, int slot2, int slot3, IntArray result, int start, int blockSize, IntArray storage) {
+            storage.Clear();
+
+            // useful pre-computes
+            int twoShelves = shelves * 2;
+            int halfShelves = shelves / 2 + 1;
+            int shelvesPlusOne = shelves + 1;
+
+            // pre-computes for tests
+            int slot1low = slot1 * 3 - halfShelves;
+            int slot1high = slot1 * 3 + 2 - halfShelves;
+            int threeSubHalf = 3 - halfShelves;
+            int secondSubOne = slot2 - 1;
+            bool early3 = (slot3 == twoShelves) && ((shelves + 7 + halfShelves) <= twoShelves);
+
+            // temp values
+            int ench1, ench2, ench3;
+            
+            long seed;
+
+            if (shelvesPlusOne == 16) {
+                for (int s = start; s != start+blockSize; s++) {
+                    seed = JavaRandom.GetSeed(s);
+                    
+                    ench1 = seed.NextTwoInt16();
+                    if (ench1 < slot1low || ench1 > slot1high) { continue; }
+
+                    ench2 = (seed.NextTwoInt16() + halfShelves) * 2 / 3;
+                    if (ench2 != secondSubOne) { continue; }
+
+                    storage.AddValue(s);
+                }
+            }
+            else if ((shelvesPlusOne & -shelvesPlusOne) == shelvesPlusOne) {
+                for (int s = start; s != start+blockSize; s++) {
+                    seed = JavaRandom.GetSeed(s);
+                    
+                    ench1 = seed.NextTwoIntP2(shelvesPlusOne);
+                    if (ench1 < threeSubHalf) { if (slot1 != 1) { continue; } }
+                    if (ench1 < slot1low || ench1 > slot1high) { continue; }
+
+                    ench2 = (seed.NextTwoIntP2(shelvesPlusOne) + halfShelves) * 2 / 3;
+                    if (ench2 != secondSubOne) { continue; }
+
+                    if (!early3) {
+                        ench3 = (seed.NextTwoIntP2(shelvesPlusOne) + halfShelves);
+                        if (Math.Max(ench3, twoShelves) != slot3) { continue; }
+                    }
+
+                    storage.AddValue(s);
+                }
+            }
+            else {
+                for (int s = start; s != start+blockSize; s++) {
+                    seed = JavaRandom.GetSeed(s);
+                    
+                    ench1 = seed.NextTwoIntNotP2(shelvesPlusOne);
+                    if (ench1 < threeSubHalf) { if (slot1 != 1) { continue; } }
+                    if (ench1 < slot1low || ench1 > slot1high) { continue; }
+
+                    ench2 = (seed.NextTwoIntNotP2(shelvesPlusOne) + halfShelves) * 2 / 3;
+                    if (ench2 != secondSubOne) { continue; }
+
+                    if (!early3) {
+                        ench3 = (seed.NextTwoIntNotP2(shelvesPlusOne) + halfShelves);
+                        if (Math.Max(ench3, twoShelves) != slot3) { continue; }
+                    }
+
+                    storage.AddValue(s);
+                }
+            }
+            lock(result) { result.AddAllValues(storage.GetValues()); }
+        }
+
+        private const int BLOCK_SIZE = 1048576;
         public int[] GetSeeds(int shelves, int slot1, int slot2, int slot3, int[] priorSeeds) {
             LastSeedsFound = -1;
             long start = Environment.TickCount;
@@ -198,63 +279,41 @@ namespace Minecraft_Enchantment_Cracker {
                 
                 progressAmt = int.MinValue;
                 progressMax = -1; // progress has explicit check for this
-                if (shelvesPlusOne == 16) {
-                    do {
-                        seed = JavaRandom.GetSeed(progressAmt);
-                    
-                        ench1 = seed.NextTwoInt16();
-                        if (ench1 < slot1low || ench1 > slot1high) { progressAmt++; continue; }
-
-                        ench2 = (seed.NextTwoInt16() + halfShelves) * 2 / 3;
-                        if (ench2 != secondSubOne) { progressAmt++; continue; }
-
-                        result.AddValue(progressAmt++);
-                    }
-                    while (progressAmt != int.MinValue);
-                    progressAmt = int.MaxValue;
-                }
-                else if ((shelvesPlusOne & -shelvesPlusOne) == shelvesPlusOne) {
-                    do {
-                        seed = JavaRandom.GetSeed(progressAmt);
-                    
-                        ench1 = seed.NextTwoIntP2(shelvesPlusOne);
-                        if (ench1 < threeSubHalf) { if (slot1 != 1) { progressAmt++; continue; } }
-                        if (ench1 < slot1low || ench1 > slot1high) { progressAmt++; continue; }
-
-                        ench2 = (seed.NextTwoIntP2(shelvesPlusOne) + halfShelves) * 2 / 3;
-                        if (ench2 != secondSubOne) { progressAmt++; continue; }
-
-                        if (!early3) {
-                            ench3 = (seed.NextTwoIntP2(shelvesPlusOne) + halfShelves);
-                            if (Math.Max(ench3, twoShelves) != slot3) { progressAmt++; continue; }
+                bool started = false;
+                int threads = Environment.ProcessorCount - 2; // this thread not included
+                Thread[] threadList = new Thread[threads];
+                for (int a = 0; a < threads; a++) {
+                    Thread t = new Thread(new ThreadStart(() => {
+                        while(!started) Thread.Sleep(1);
+                        int initial, computed;
+                        IntArray storage = new IntArray(BLOCK_SIZE);
+                        while (true) {
+                            do {
+                                initial = progressAmt;
+                                if (initial == int.MinValue) return;
+                                computed = progressAmt + BLOCK_SIZE;
+                            }
+                            while (initial != Interlocked.CompareExchange(ref progressAmt, computed, initial));
+                            FindSeeds(shelves, slot1, slot2, slot3, result, initial, BLOCK_SIZE, storage);
                         }
-
-                        result.AddValue(progressAmt++);
-                    }
-                    while (progressAmt != int.MinValue);
-                    progressAmt = int.MaxValue;
+                    }));
+                    threadList[a] = t;
+                    t.Start();
                 }
-                else {
+                int init, comp;
+                IntArray store = new IntArray(BLOCK_SIZE);
+                while (true) {
                     do {
-                        seed = JavaRandom.GetSeed(progressAmt);
-                    
-                        ench1 = seed.NextTwoIntNotP2(shelvesPlusOne);
-                        if (ench1 < threeSubHalf) { if (slot1 != 1) { progressAmt++; continue; } }
-                        if (ench1 < slot1low || ench1 > slot1high) { progressAmt++; continue; }
-
-                        ench2 = (seed.NextTwoIntNotP2(shelvesPlusOne) + halfShelves) * 2 / 3;
-                        if (ench2 != secondSubOne) { progressAmt++; continue; }
-
-                        if (!early3) {
-                            ench3 = (seed.NextTwoIntNotP2(shelvesPlusOne) + halfShelves);
-                            if (Math.Max(ench3, twoShelves) != slot3) { progressAmt++; continue; }
-                        }
-
-                        result.AddValue(progressAmt++);
+                        init = progressAmt;
+                        if (init == int.MinValue && started) goto outer;
+                        comp = progressAmt + BLOCK_SIZE;
                     }
-                    while (progressAmt != int.MinValue);
-                    progressAmt = int.MaxValue;
+                    while (init != Interlocked.CompareExchange(ref progressAmt, comp, init));
+                    started = true;
+                    FindSeeds(shelves, slot1, slot2, slot3, result, init, BLOCK_SIZE, store);
                 }
+                outer: 
+                foreach (Thread t in threadList) t.Join();
             }
             else {
                 // reasonable guess (+5 is for small quantities)
