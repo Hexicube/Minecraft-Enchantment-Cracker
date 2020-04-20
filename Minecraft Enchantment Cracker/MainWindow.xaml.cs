@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using Minecraft_Enchantment_Cracker.Tasks;
 
 namespace Minecraft_Enchantment_Cracker {
     public class ItemBackgroundCanvas : Canvas {

@@ -1,4 +1,4 @@
-﻿namespace Minecraft_Enchantment_Cracker {
+﻿namespace Minecraft_Enchantment_Cracker.Tasks {
     public interface IProgressiveTask {
         float Progress { get; }
         string ProgressText { get; }
