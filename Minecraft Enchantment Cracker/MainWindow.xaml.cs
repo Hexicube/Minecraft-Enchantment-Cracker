@@ -67,6 +67,7 @@ namespace Minecraft_Enchantment_Cracker {
             shelves[15] = new TextBox[] { Shelf15Slot1, Shelf15Slot2, Shelf15Slot3 };
 
             Task.Run(() => {
+                Task.Delay(2500).Wait();
                 Debug.WriteLine("Running tester");
                 
                 long start = Environment.TickCount;

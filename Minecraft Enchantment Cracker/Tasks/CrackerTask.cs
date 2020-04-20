@@ -139,8 +139,9 @@ namespace Minecraft_Enchantment_Cracker {
             return enchantability < twiceShelves ? twiceShelves : enchantability;
         }
 
-        private int progressAmt, progressMax;
+        private int progressAmt, progressMax = -2;
         public float Progress { get {
+            if (progressMax == -2) return 0;
             if (progressMax == -1) return (float)((long)progressAmt - (long)int.MinValue) / (float)((long)int.MaxValue - (long)int.MinValue);
             return (float)progressAmt / (float)progressMax;
         } }
@@ -159,6 +160,7 @@ namespace Minecraft_Enchantment_Cracker {
             return $"{v}";
         }
         public string ProgressText { get {
+            if (progressMax == -2) return "Waiting for input";
             if (LastSeedsFound == -1) {
                 if (progressMax == -1) return $"{LongToQty((long)progressAmt - (long)int.MinValue)} / {LongToQty((long)int.MaxValue - (long)int.MinValue)}";
                 return $"{LongToQty(progressAmt)} / {LongToQty(progressMax)}";
@@ -168,6 +170,7 @@ namespace Minecraft_Enchantment_Cracker {
             return $"Seeds found: {LongToQty(LastSeedsFound)}";
         } }
         public string ProgressText2 { get {
+            if (progressMax == -2) return "";
             if (LastSeedsFound == -1) return $"{((int)(Progress*100)).ToString("00")}%";
             return $"Took {(LastSearchTime/1000f).ToString("0.0")}s";
         } }
@@ -299,6 +302,7 @@ namespace Minecraft_Enchantment_Cracker {
                         }
                     }));
                     threadList[a] = t;
+                    t.IsBackground = true;
                     t.Start();
                 }
                 int init, comp;
