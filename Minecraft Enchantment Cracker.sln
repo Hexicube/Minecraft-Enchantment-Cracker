@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.1062
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Minecraft Enchantment Cracker", "Minecraft Enchantment Cracker\Minecraft Enchantment Cracker.csproj", "{DEF0A159-01DC-4467-8CB0-45533335C177}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{A10F28EF-0CFC-48A7-B735-B32B4A103C50}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{DEF0A159-01DC-4467-8CB0-45533335C177}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DEF0A159-01DC-4467-8CB0-45533335C177}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DEF0A159-01DC-4467-8CB0-45533335C177}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A10F28EF-0CFC-48A7-B735-B32B4A103C50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A10F28EF-0CFC-48A7-B735-B32B4A103C50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A10F28EF-0CFC-48A7-B735-B32B4A103C50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A10F28EF-0CFC-48A7-B735-B32B4A103C50}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
