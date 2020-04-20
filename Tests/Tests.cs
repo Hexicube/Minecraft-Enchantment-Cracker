@@ -43,42 +43,6 @@ namespace Tests
         [TestFixture]
         public static class CrackingTests
         {
-            [TestCase(15, 7, 17, 30, null, 81788565)]
-            public static void CrackRng_Test(
-                int shelves,
-                int slot1,
-                int slot2,
-                int slot3,
-                int[] priorSeeds,
-                int expectedSeeds
-            )
-            {
-                int[] results = new CrackerTask().GetSeeds(shelves, slot1, slot2, slot3, priorSeeds);
-                Assert.AreEqual(expectedSeeds, results.Length);
-            }
-
-            [TestCase(15, 7, 17, 30, null, 81788565, 14, 7, 15, 28, 2073151)]
-            public static void CrackRngMultiple_Test(
-                int shelves1,
-                int s11,
-                int s21,
-                int s31,
-                int[] priorSeeds,
-                int expected1,
-                int shelves2,
-                int s12,
-                int s22,
-                int s32,
-                int expected2
-            )
-            {
-                var cracker = new CrackerTask();
-                int[] results = cracker.GetSeeds(shelves1, s11, s21, s31, priorSeeds);
-                Assert.AreEqual(expected1, results.Length);
-                int[] results2 = cracker.GetSeeds(shelves2, s12, s22, s32, results);
-                Assert.AreEqual(expected2, results2.Length);
-            }
-
             [TestCase(
                 new[] {15, 14, 13, 12, 11, 10, 9},
                 new[] {6, 5, 4, 6, 5, 5, 5},
